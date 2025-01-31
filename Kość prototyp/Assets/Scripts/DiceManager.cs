@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using System.Linq;
+using DataModels;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class DiceManager : MonoBehaviour
 {
     [SerializeField] private List<SingleDice> diceList = new List<SingleDice>();
-    private Dictionary<SingleDice, int> diceResults = new Dictionary<SingleDice, int>();
+    [SerializeField] private ComboList comboList;
 
     private bool isCharging;
     private bool wasTossed = false;
@@ -12,13 +16,14 @@ public class DiceManager : MonoBehaviour
     public Slider powerSlider;
     [SerializeField] private Color lowPowerColor = Color.green;
     [SerializeField] private Color highPowerColor = Color.red;
+
     private void Start()
     {
         foreach (SingleDice dice in diceList)
         {
             dice.diceManager = this;
         }
-        
+
         if (powerSlider != null)
         {
             powerSlider.minValue = diceList[0].minPower; // Ustawienie wartości minimalnej mocy
@@ -41,31 +46,38 @@ public class DiceManager : MonoBehaviour
             ThrowAllDice();
             wasTossed = true;
         }
+
+        if (AreAllDiceResting())
+        {
+            List <DiceData> results = GatherAllResults();
+            VerifyCombos(results);
+        }
     }
 
-    public void RecordDiceResult(SingleDice dice, int value)
+    private void VerifyCombos(List<DiceData> results)
     {
-        if (diceResults.ContainsKey(dice))
-        {
-            diceResults[dice] = value;
-        }
-        else
-        {
-            diceResults.Add(dice, value);
-        }
-
-        Debug.Log($"Dice {dice.name} rolled a value of {value}");
+        bool result = comboList.MatchesCombo(results.Select(x => x.Side).ToList());
+        
     }
 
-    public void PrintAllResults()
+    private List<DiceData> GatherAllResults()
     {
-        Debug.Log("All Dice Results:");
-        foreach (var entry in diceResults)
+        var results = new List<DiceData>();
+    
+        foreach (var dice in diceList)
         {
-            Debug.Log($"Dice {entry.Key.name} rolled a value of {entry.Value}");
+            var result = dice.GetResult();
+            if(result==null) continue;
+            results.Add(result);
         }
+        return results;
     }
 
+    private bool AreAllDiceResting()
+    {
+        return diceList.All(x => x.HasResult);
+    }
+    
     private void ChargeAllDice()
     {
         foreach (SingleDice dice in diceList)
@@ -82,7 +94,7 @@ public class DiceManager : MonoBehaviour
             dice.TossDice();
         }
     }
-    
+
     private void UpdatePowerSlider(SingleDice dice)
     {
         if (powerSlider != null)
