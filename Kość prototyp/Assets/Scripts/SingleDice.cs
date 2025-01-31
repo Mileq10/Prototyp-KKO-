@@ -67,9 +67,16 @@ public class SingleDice : MonoBehaviour
     }
 
 
-   
 
-    
+
+    public void Reset()
+    {
+        _isRolling = false;
+        currentPower = minPower;
+        _wasTossed = false;
+        _hasResult = false;
+        _rb.isKinematic = true;
+    }
     public void ChargePower()
     {
         if (_cyclicPower)

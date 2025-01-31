@@ -14,10 +14,15 @@ namespace ScriptableObjects
         [System.Serializable]
         public class Combo 
         {
+            public string name;
+            public int rank = 1;
           public List<EDiceSide> values = new List<EDiceSide>();
         }
-
-        public bool MatchesCombo(List<EDiceSide> toList)
+        /// <summary>
+        /// Checks all possible combos, finds highest ranked, first match
+        /// </summary>
+        /// <returns>1 if reaches maxRank, 0 if reaches minRank, -1 if fails</returns>
+        public int MatchesCombo(List<EDiceSide> toList, int minRank, int critRank)
         {
             foreach (var combo in combos)
             {
@@ -32,13 +37,20 @@ namespace ScriptableObjects
                     
                     if (values.Count == 0)
                     {
-                        Debug.Log("Combo");
-                        return true;
+                        if(combo.rank < minRank)
+                        {
+                            continue;
+                        }
+                        if(combo.rank >= critRank)
+                        {
+                            return 1;
+                        }
+                        return 0;
                     }
                 }
                     
             }
-            return false;
+            return -1;
         }
     }
 }

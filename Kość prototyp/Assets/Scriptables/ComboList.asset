@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: ComboList
   m_EditorClassIdentifier: 
   combos:
-  - values: 0100000001000000
-  - values: 0200000002000000
-  - values: 0300000003000000
-  - values: 0400000004000000
-  - values: 0500000005000000
-  - values: 0600000006000000
+  - name: Pair
+    rank: 1
+    values: 0100000001000000
+  - name: Pair
+    rank: 1
+    values: 0200000002000000
+  - name: Pair
+    rank: 1
+    values: 0300000003000000
+  - name: Pair
+    rank: 1
+    values: 0400000004000000
+  - name: Pair
+    rank: 1
+    values: 0500000005000000
+  - name: Pair
+    rank: 1
+    values: 0600000006000000
