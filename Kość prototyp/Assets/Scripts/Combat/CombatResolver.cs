@@ -10,7 +10,12 @@ public class CombatResolver : MonoBehaviour
     private GameObject currentEnemyModel;
     private RuntimeEnemy currentEnemy;
     private List<EnemyData> upcomingEnemies;
+    private bool _canReroll = true;
+
     public RuntimeEnemy CurrentEnemy => currentEnemy;
+
+    public event Action<RuntimeEnemy> OnNewEnemy;
+    public event Action<RuntimeEnemy> OnEnemyDestroyed;
 
     private void Start()
     {
@@ -28,6 +33,7 @@ public class CombatResolver : MonoBehaviour
             return;
         }
         currentEnemy.Damage(damage+1);
+        SetReroll(true);
     }
     private void SpawnEnemy(EnemyData enemyData)
     {
@@ -39,6 +45,7 @@ public class CombatResolver : MonoBehaviour
         currentEnemyData = currentEnemy.EnemyData;
         SpawnEnemyModel(currentEnemy.EnemyData.Prefab);
         currentEnemy.HealthModel.OnDeath += OnEnemyDeath;
+        OnNewEnemy?.Invoke(currentEnemy);
     }
 
     private void SpawnEnemyModel(GameObject prefab)
@@ -54,12 +61,18 @@ public class CombatResolver : MonoBehaviour
 
     private void ClearCurrentEnemy()
     {
+        if(currentEnemy == null)
+        {
+            return;
+        }
         currentEnemy.HealthModel.OnDeath -= OnEnemyDeath;
         currentEnemy.OnDestroy();
         if (currentEnemyModel != null)
             Destroy(currentEnemyModel);
         currentEnemyModel = null;
+        OnEnemyDestroyed?.Invoke(currentEnemy);
         currentEnemy = null;
+
     }
 
     private void OnEnemyDeath()
@@ -72,10 +85,21 @@ public class CombatResolver : MonoBehaviour
         var nextEnemy = upcomingEnemies[0];
         upcomingEnemies.RemoveAt(0);
         SpawnEnemy(nextEnemy);
+        SetReroll(true);
     }
 
-    internal void Init()
+    public void Init()
     {
         OnEnemyDeath();
+    }
+
+    public bool CanReroll()
+    {
+        return _canReroll;
+    }
+
+    public void SetReroll(bool value)
+    {
+        _canReroll = value;
     }
 }

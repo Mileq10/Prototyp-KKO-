@@ -21,8 +21,10 @@ public class SingleDice : MonoBehaviour
     private bool _isRolling = false;
 
     private Vector3 _diceTop;
+    /*
     public Camera playerCamera;
     public Camera boardView;
+    */
     private Rigidbody _rb;
 
     public EDiceSide RolledValue { get; private set; }
@@ -42,13 +44,12 @@ public class SingleDice : MonoBehaviour
     [SerializeField] private Transform sideFront;
     [SerializeField] private Transform sideBack;
 
-    private Camera _currentCamera;
+ 
     private bool _hasResult = false;
 
 
     void Start()
     {
-        _currentCamera = Camera.main;
         _rb = GetComponent<Rigidbody>();
         _rb.isKinematic = true;
         currentPower = minPower;
@@ -93,24 +94,12 @@ public class SingleDice : MonoBehaviour
         //Debug.Log($"Current Power: {currentPower}");
     }
 
-    public void TossDice()
+    public void TossDice(Vector3 forceValue)
     {
-        Ray ray = _currentCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
 
-        Vector3 throwDirection;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            throwDirection = (hit.point - transform.position).normalized;
-        }
-        else
-        {
-            throwDirection = playerCamera.transform.forward;
-        }
-
+        forceValue = forceValue * Time.deltaTime * currentPower;
         _rb.isKinematic = false;
-        _rb.AddForce(throwDirection * (currentPower * Time.deltaTime), ForceMode.Impulse);
+        _rb.AddForce(forceValue, ForceMode.Impulse);
         AddRandomRotation();
 
         _wasTossed = true;

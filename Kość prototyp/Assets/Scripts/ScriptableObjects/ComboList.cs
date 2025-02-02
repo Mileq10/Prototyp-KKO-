@@ -11,21 +11,17 @@ namespace ScriptableObjects
     {
         public List<Combo> combos = new List<Combo>();
         
-        [System.Serializable]
-        public class Combo 
-        {
-            public string name;
-            public int rank = 1;
-          public List<EDiceSide> values = new List<EDiceSide>();
-        }
+        
         /// <summary>
         /// Checks all possible combos, finds highest ranked, first match
         /// </summary>
         /// <returns>1 if reaches maxRank, 0 if reaches minRank, -1 if fails</returns>
-        public int MatchesCombo(List<EDiceSide> toList, int minRank, int critRank)
+        public int MatchesCombo(List<EDiceSide> toList, int minRank, int critRank, out Combo selectedCombo)
         {
+            selectedCombo = null;
             foreach (var combo in combos)
             {
+                selectedCombo = combo;
                 if (toList.Count < combo.values.Count) continue;
                 var values = new List<EDiceSide>(combo.values);
                 for(var i = values.Count - 1; i >= 0; i--)
@@ -51,6 +47,18 @@ namespace ScriptableObjects
                     
             }
             return -1;
+        }
+        [System.Serializable]
+        public class Combo
+        {
+            public string name;
+            public int rank = 1;
+            public List<EDiceSide> values = new List<EDiceSide>();
+
+            public override string ToString()
+            {
+                return name;
+            }
         }
     }
 }

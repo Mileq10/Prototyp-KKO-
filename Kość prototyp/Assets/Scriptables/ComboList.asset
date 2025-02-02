@@ -31,3 +31,21 @@ MonoBehaviour:
   - name: Pair
     rank: 1
     values: 0600000006000000
+  - name: Two Pair
+    rank: 2
+    values: 06000000060000000100000001000000
+  - name: Three of a Kind
+    rank: 3
+    values: 060000000600000006000000
+  - name: Four of a Kind
+    rank: 6
+    values: 06000000060000000600000006000000
+  - name: Five of a Kind
+    rank: 7
+    values: 0600000006000000060000000600000006000000
+  - name: Full House
+    rank: 5
+    values: 0600000006000000060000000100000001000000
+  - name: Five of a Kind
+    rank: 7
+    values: 0600000005000000040000000300000002000000
