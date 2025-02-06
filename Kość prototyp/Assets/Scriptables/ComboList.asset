@@ -21,3 +21,19 @@ MonoBehaviour:
     rank: 0
     sprite: {fileID: 21300000, guid: 313031ceb0b0bbe47a0068561d89c982, type: 3}
     values: 0100000003000000040000000500000006000000
+  - name: Pair
+    rank: 1
+    sprite: {fileID: 21300000, guid: 313031ceb0b0bbe47a0068561d89c982, type: 3}
+    values: 0100000001000000020000000300000004000000
+  - name: Pair
+    rank: 1
+    sprite: {fileID: 21300000, guid: 313031ceb0b0bbe47a0068561d89c982, type: 3}
+    values: 0100000001000000030000000400000005000000
+  - name: Pair
+    rank: 1
+    sprite: {fileID: 21300000, guid: 313031ceb0b0bbe47a0068561d89c982, type: 3}
+    values: 0100000001000000040000000500000006000000
+  - name: Pair
+    rank: 1
+    sprite: {fileID: 21300000, guid: 313031ceb0b0bbe47a0068561d89c982, type: 3}
+    values: 0200000002000000010000000300000004000000
