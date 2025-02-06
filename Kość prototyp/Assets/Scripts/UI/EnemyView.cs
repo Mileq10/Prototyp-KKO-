@@ -1,4 +1,5 @@
 using DG.Tweening;
+using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,11 +7,12 @@ using UnityEngine.UI;
 public class EnemyView : MonoBehaviour
 {
     [SerializeField] private Slider slider;
-    [SerializeField] private TextMeshProUGUI minTMP;
-    [SerializeField] private TextMeshProUGUI critTMP;
+    [SerializeField] private Image minTMP;
+    [SerializeField] private Image critTMP;
     [SerializeField] private TextMeshProUGUI nameTMP;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private CombatResolver combatResolver;
+    [SerializeField] private ComboList comboList;
     private RuntimeEnemy _enemy;
     private float fadeTime;
 
@@ -25,7 +27,6 @@ public class EnemyView : MonoBehaviour
     public void OnDestroy()
     {
         combatResolver.OnNewEnemy -= Show;
-
     }
     public void Show(RuntimeEnemy enemy)
     {
@@ -36,8 +37,8 @@ public class EnemyView : MonoBehaviour
             return;
         }
         canvasGroup.DOFade(1.0f, fadeTime).SetEase(Ease.InOutCubic);
-        minTMP.SetText(_enemy.EnemyData.MinimumRank.ToString());
-        critTMP.SetText(_enemy.EnemyData.CriticalRank.ToString());
+        minTMP.sprite = (comboList.GetSpriteByRank(_enemy.EnemyData.MinimumRank));
+        critTMP.sprite = (comboList.GetSpriteByRank(_enemy.EnemyData.CriticalRank));
         nameTMP.SetText(_enemy.EnemyData.Name.ToString());
     }
 

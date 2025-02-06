@@ -13,39 +13,11 @@ MonoBehaviour:
   m_Name: ComboList
   m_EditorClassIdentifier: 
   combos:
-  - name: Pair
-    rank: 1
-    values: 0100000001000000
-  - name: Pair
-    rank: 1
-    values: 0200000002000000
-  - name: Pair
-    rank: 1
-    values: 0300000003000000
-  - name: Pair
-    rank: 1
-    values: 0400000004000000
-  - name: Pair
-    rank: 1
-    values: 0500000005000000
-  - name: Pair
-    rank: 1
-    values: 0600000006000000
-  - name: Two Pair
-    rank: 2
-    values: 06000000060000000100000001000000
-  - name: Three of a Kind
-    rank: 3
-    values: 060000000600000006000000
-  - name: Four of a Kind
-    rank: 6
-    values: 06000000060000000600000006000000
-  - name: Five of a Kind
-    rank: 7
-    values: 0600000006000000060000000600000006000000
-  - name: Full House
-    rank: 5
-    values: 0600000006000000060000000100000001000000
-  - name: Five of a Kind
-    rank: 7
-    values: 0600000005000000040000000300000002000000
+  - name: Bust
+    rank: 0
+    sprite: {fileID: 21300000, guid: 313031ceb0b0bbe47a0068561d89c982, type: 3}
+    values: 0100000002000000030000000400000006000000
+  - name: Bust
+    rank: 0
+    sprite: {fileID: 21300000, guid: 313031ceb0b0bbe47a0068561d89c982, type: 3}
+    values: 0100000003000000040000000500000006000000

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1070cdb82483d194ea891de02399e31b, type: 3}
   m_Name: Dummy
   m_EditorClassIdentifier: 
-  <MinimumRank>k__BackingField: 0
-  <CriticalRank>k__BackingField: 1
+  <MinimumRank>k__BackingField: 1
+  <CriticalRank>k__BackingField: 2
   <Prefab>k__BackingField: {fileID: 980771653394896274, guid: 04de6fb19a666724a93b363dec211a47, type: 3}
   <Name>k__BackingField: Dummy
   <Health>k__BackingField: 5

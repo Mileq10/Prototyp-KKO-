@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataModels;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ScriptableObjects
@@ -10,8 +9,26 @@ namespace ScriptableObjects
     public class ComboList : ScriptableObject
     {
         public List<Combo> combos = new List<Combo>();
-        
-        
+
+        public string GetNameByRank(int rank)
+        {
+            var result = combos.FirstOrDefault(c => c.rank == rank);
+            if (result == null)
+            {
+                return string.Empty;
+            }
+            return result.name;
+        }
+        public Sprite GetSpriteByRank(int rank)
+        {
+            var result = combos.FirstOrDefault(c => c.rank == rank);
+            if (result == null)
+            {
+                return null;
+            }
+            return result.sprite;
+        }
+
         /// <summary>
         /// Checks all possible combos, finds highest ranked, first match
         /// </summary>
@@ -53,6 +70,7 @@ namespace ScriptableObjects
         {
             public string name;
             public int rank = 1;
+            public Sprite sprite;
             public List<EDiceSide> values = new List<EDiceSide>();
 
             public override string ToString()
