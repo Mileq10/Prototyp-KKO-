@@ -4,16 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-// Enum for the six dice faces, with an underlying numeric value that reflects rank.
-/*public enum DiceSide
-{
-    Eight = 1,
-    Nine = 2,
-    Ten = 3,
-    Jack = 4,
-    Queen = 5,
-    King = 6
-}*/
+
 
 // Enum for the poker hand outcomes.
 // The order of the enum values reflects their ranking.
