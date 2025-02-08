@@ -10,6 +10,19 @@ public class CombatResolver : MonoBehaviour
     private GameObject currentEnemyModel;
     private RuntimeEnemy currentEnemy;
     private List<EnemyData> upcomingEnemies;
+
+    private List<EnemyData> UpcomingEnemies 
+    { 
+        get 
+        {
+            if (upcomingEnemies == null)
+            {
+                upcomingEnemies = new List<EnemyData>();
+                upcomingEnemies.AddRange(enemyData);
+            }
+            return upcomingEnemies;
+        } 
+    }
     private bool _canReroll = true;
 
     public RuntimeEnemy CurrentEnemy => currentEnemy;
@@ -19,11 +32,11 @@ public class CombatResolver : MonoBehaviour
 
     private void Start()
     {
-        upcomingEnemies = new List<EnemyData>();
-        upcomingEnemies.AddRange(enemyData);
+        
     }
     public void ResolveCombat(int damage)
     {
+        
         if (currentEnemy == null)
         {
             return;
@@ -77,13 +90,13 @@ public class CombatResolver : MonoBehaviour
 
     private void OnEnemyDeath()
     {
-        if (upcomingEnemies.Count == 0) 
+        if (UpcomingEnemies.Count == 0) 
         {
             ClearCurrentEnemy();
             return;
         }
-        var nextEnemy = upcomingEnemies[0];
-        upcomingEnemies.RemoveAt(0);
+        var nextEnemy = UpcomingEnemies[0];
+        UpcomingEnemies.RemoveAt(0);
         SpawnEnemy(nextEnemy);
         SetReroll(true);
     }

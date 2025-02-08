@@ -16,13 +16,12 @@ public class EnemyView : MonoBehaviour
     private RuntimeEnemy _enemy;
     private float fadeTime;
 
-    public void Start()
+    public void Awake()
     {
         slider.minValue = 0;
         slider.maxValue = 1;
         combatResolver.OnNewEnemy += Show;
         combatResolver.OnEnemyDestroyed += (e) => Show(null);
-        Show(null);
     }
     public void OnDestroy()
     {
