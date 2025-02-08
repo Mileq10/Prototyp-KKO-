@@ -4,9 +4,9 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     [field:SerializeField]
-    public int MinimumRank { get; set; } = 0;
+    public PokerHand MinimumRank { get; set; } = 0;
     [field: SerializeField]
-    public int CriticalRank { get; set; } = 0;
+    public PokerHand CriticalRank { get; set; } = 0;
     [field: SerializeField]
     public GameObject Prefab { get; set; }
     [field: SerializeField]

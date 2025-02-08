@@ -1,15 +1,15 @@
 using DataModels;
 using DG.Tweening;
+using ScriptableObjects;
 using System.Collections.Generic;
-using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static ScriptableObjects.ComboList;
 
 public class ResultsView : MonoBehaviour
 {
     [SerializeField] private DiceManager diceManager;
+    [SerializeField] private ComboList comboList;
     [Header("UI")]
     [SerializeField] private RectTransform root;
     [SerializeField] private ResultItem prefab;
@@ -37,9 +37,29 @@ public class ResultsView : MonoBehaviour
     private void UpdateView()
     {
         comboCanvasGroup.DOFade(0.0f, fadeTime);
+
+        if (spawnedList.Count > 0)
+        {
+            for (var i = spawnedList.Count - 1; i >= 0; i--)
+            {
+                spawnedList[i].gameObject.SetActive(false);
+                Destroy(spawnedList[i]);
+                spawnedList.RemoveAt(i);
+            }
+        }
     }
-    private void UpdateView(List<DiceData> results, Combo combo)
+    private void UpdateView(List<DiceData> results, PokerHand hand)
     {
+        if(spawnedList.Count > 0)
+        {
+            for (var i = spawnedList.Count - 1; i >= 0; i--)
+            {
+                spawnedList[i].gameObject.SetActive(false);
+                Destroy(spawnedList[i]);
+                spawnedList.RemoveAt(i);
+            }
+        }
+
         foreach (var diceData in results)
         {
             var item = Instantiate(prefab, root);
@@ -48,22 +68,16 @@ public class ResultsView : MonoBehaviour
             item.Sprite = null;
             item.UpdateValues();
         }
-        if(combo != null)
+        
         comboCanvasGroup.DOFade(1.0f, fadeTime).OnComplete(() => { comboCanvasGroup.DOFade(0.0f, fadeTime).SetDelay(delayTime); });
         
 
 
-        if(combo == null)
-        {
-            strongestComboTMP.SetText(string.Empty);
-            strongestComboImage.sprite = null;
-        }
-        else
-        {
-            strongestComboTMP.SetText(combo.ToString());
-            strongestComboImage.sprite = combo.sprite;
-        }
-        strongestComboImage.color = combo == null ? Color.clear : Color.white;
+       
+        strongestComboTMP.SetText(comboList.GetName(hand));
+        strongestComboImage.sprite = comboList.GetSprite(hand);
+        
+        strongestComboImage.color = Color.white;
     }
 
     

@@ -8,7 +8,20 @@ namespace ScriptableObjects
     [CreateAssetMenu(fileName = "ComboList", menuName = "Lists/ComboList", order = 1)]
     public class ComboList : ScriptableObject
     {
-        public List<Combo> combos = new List<Combo>();
+        [SerializeField] private List<PokerHandData> handData = new();
+        public string GetName(PokerHand hand) => GetHand(hand).handName;
+        public Sprite GetSprite(PokerHand hand) => GetHand(hand).sprite;
+        private PokerHandData GetHand(PokerHand hand) => handData.FirstOrDefault(x => x.type == hand);
+
+        [System.Serializable]
+        public class PokerHandData
+        {
+            public PokerHand type;
+            public string handName;
+            public Sprite sprite;
+
+        }
+        /*public List<Combo> combos = new List<Combo>();
 
         public string GetNameByRank(int rank)
         {
@@ -77,6 +90,6 @@ namespace ScriptableObjects
             {
                 return name;
             }
-        }
+        }*/
     }
 }

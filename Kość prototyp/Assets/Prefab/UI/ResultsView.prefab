@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceManager: {fileID: 0}
+  comboList: {fileID: 11400000, guid: cc7c68827f5e98b4795d016141891fa8, type: 2}
   root: {fileID: 8044537225572314962}
   prefab: {fileID: 2019138903073931217, guid: c0312a4d4b995d64086a02381907362e, type: 3}
   strongestComboTMP: {fileID: 1009766912626273264}

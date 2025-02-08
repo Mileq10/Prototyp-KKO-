@@ -30,7 +30,7 @@ public class DiceManager : MonoBehaviour
     public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
     public event Action OnClearResults;
 
-    public event Action<List<DiceData>, ComboList.Combo> OnResults;
+    public event Action<List<DiceData>, PokerHand> OnResults;
 
     private void Start()
     {
@@ -145,10 +145,12 @@ public class DiceManager : MonoBehaviour
     
 
 
-    private int VerifyCombos(List<DiceData> results, EnemyData enemyData, out ComboList.Combo combo)
+    private int VerifyCombos(List<DiceData> results, EnemyData enemyData, out PokerHand pokerHand)
     {
-        return comboList.MatchesCombo(results.Select(x => x.Side).ToList(), enemyData.MinimumRank, enemyData.CriticalRank, out combo);
-
+        /*return comboList.MatchesCombo(results.Select(x => x.Side).ToList(), enemyData.MinimumRank, enemyData.CriticalRank, out combo);*/
+        var rolled = results.Select(x => x.Side).ToList();
+        pokerHand = PokerDiceEvaluator.EvaluateHand(rolled);
+        return PokerDiceEvaluator.EvaluateResult(pokerHand, enemyData.MinimumRank, enemyData.CriticalRank);
     }
 
     private List<DiceData> GatherAllResults()
@@ -214,13 +216,11 @@ public class DiceManager : MonoBehaviour
     }
     private void FillComboList(ComboList comboList)
     {
-        var distinct = new List<string>();
-        foreach (var combo in comboList.combos)
+        var enumValues = (PokerHand[])Enum.GetValues(typeof(PokerHand));
+        foreach (var hand in enumValues)
         {
-            if (distinct.Contains(combo.name)) continue;
-            distinct.Add(combo.name);
             var item = Instantiate(comboItemPrefab, combosRoot);
-            item.text = combo.name;
+            item.text = comboList.GetName(hand);
 
         }
     }

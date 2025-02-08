@@ -37,8 +37,8 @@ public class EnemyView : MonoBehaviour
             return;
         }
         canvasGroup.DOFade(1.0f, fadeTime).SetEase(Ease.InOutCubic);
-        minTMP.sprite = (comboList.GetSpriteByRank(_enemy.EnemyData.MinimumRank));
-        critTMP.sprite = (comboList.GetSpriteByRank(_enemy.EnemyData.CriticalRank));
+        minTMP.sprite = (comboList.GetSprite(_enemy.EnemyData.MinimumRank));
+        critTMP.sprite = (comboList.GetSprite(_enemy.EnemyData.CriticalRank));
         nameTMP.SetText(_enemy.EnemyData.Name.ToString());
     }
 
