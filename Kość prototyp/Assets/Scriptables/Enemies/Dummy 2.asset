@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MinimumRank>k__BackingField: 2
   <CriticalRank>k__BackingField: 4
-  <Prefab>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 980771653394896274, guid: a6bf75dec8da13941940b29c08acb714, type: 3}
   <Name>k__BackingField: Giga Dummy
   <Health>k__BackingField: 6

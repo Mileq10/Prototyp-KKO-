@@ -1685,8 +1685,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData:
   - {fileID: 11400000, guid: 062ff15d8eef9b443a4292fa0e11b2b9, type: 2}
-  - {fileID: 11400000, guid: 062ff15d8eef9b443a4292fa0e11b2b9, type: 2}
-  - {fileID: 11400000, guid: 062ff15d8eef9b443a4292fa0e11b2b9, type: 2}
+  - {fileID: 11400000, guid: e445737a9bcf54f4e8cc206f450a0108, type: 2}
+  - {fileID: 11400000, guid: e445737a9bcf54f4e8cc206f450a0108, type: 2}
   - {fileID: 11400000, guid: 062ff15d8eef9b443a4292fa0e11b2b9, type: 2}
   - {fileID: 11400000, guid: 062ff15d8eef9b443a4292fa0e11b2b9, type: 2}
   - {fileID: 11400000, guid: 062ff15d8eef9b443a4292fa0e11b2b9, type: 2}
